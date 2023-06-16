@@ -1,4 +1,4 @@
-# Logs Rewind POC using Fluentbit
+# Logs Rewind/Enrich POC using Fluentbit
 
 This prototype demonstrates how you could mimic a "rewind and enrich" feature.
 
