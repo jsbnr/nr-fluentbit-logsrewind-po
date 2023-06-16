@@ -8,6 +8,7 @@ In this example we use fluentbit to ship logs to New Relic. The log shipper ship
 
 When you need the DEBUG logs for a time window we call a further fluentbit configuration, which consults the cahce and extracts the logs for the period specified. It then places this in a location the general shipper will ship them. It could ship them directly too of course.
 
+![Flow](flow.png)
 
 ### Prototype Running instructions
 On an Amazon linux EC2 do the follwing. The fluentbit config should work anywhere but the scripts might need adjusting for other OS's.
@@ -40,4 +41,6 @@ You need to provide a source for the logs, a destination for the cache of  logs 
 
 - Extract data for chosen window (in yet another window)
 Here we need to supply the file paths and then a start and end time for the window of data we're interested in:
+```
 ~/logrewind/extractLogs.sh -S "$( eval echo ~ )/logrewind/cache/debug_cache.log" -T "$( eval echo ~ )/logrewind/extracted/extracted_" -s "2023/06/16 13:19" -e "2023/06/16 13:20"
+```
