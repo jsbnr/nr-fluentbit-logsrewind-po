@@ -1,0 +1,22 @@
+[INPUT]
+    Name             tail
+    Path             ${LOGSOURCE}
+    Tag              source1
+    Parser           debugcache
+    Exit_On_Eof      true
+    Read_from_Head   true
+
+# Run filter script to drop based on timestamp
+[FILTER]
+    name   lua
+    match  source1
+    script script.lua
+    call   cb_timeFilter
+
+#Output to file 
+[OUTPUT]
+    name     file
+    format   template
+    template [{time}] {LOGLEVEL} {message}
+    match    source1
+    file     ${TARGET_FILENAME}

@@ -1,0 +1,39 @@
+# Source logs input
+[INPUT]
+    Name   tail
+    Path   ${SOURCE_PATH}
+    Tag    srcOriginal
+    Parser testparser
+
+# Extracted logs input
+[INPUT]
+    Name   tail
+    Path   ${EXTRACT_PATH}
+    Tag    srcExtracted
+    Parser debugcache
+
+# Change tag name for all those logs with "DEBUG"
+[FILTER]
+    name   rewrite_tag
+    match  srcOriginal
+    rule   $LOGLEVEL DEBUG debuglog false
+
+# Make the logs easier to find
+[FILTER]
+    Name record_modifier
+    Match src*
+    Record tool logrewindpoc
+
+#Output  non-debug stream and extracted DEBUG  to New Relic 
+[OUTPUT]
+    name    nrlogs
+    match   src*
+    api_key ${APIKEY}
+
+#Output debug messages to file cache 
+[OUTPUT]
+    name     file
+    format   template
+    template [{time}] {LOGLEVEL} {message}
+    match    debuglog
+    file     ${CACHE_PATH} 

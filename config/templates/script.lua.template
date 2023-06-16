@@ -1,0 +1,10 @@
+function cb_timeFilter(tag, timestamp, record)
+   startTime = os.time({year=${START_YEAR}, month=${START_MONTH}, day=${START_DAY}, hour=${START_HOUR}, min=${START_MINUTE}})
+   endTime = os.time({year=${END_YEAR}, month=${END_MONTH}, day=${END_DAY}, hour=${END_HOUR}, min=${END_MINUTE}})
+   returnVal= -1
+   if(timestamp < endTime and timestamp >=startTime)
+   then
+   	   returnVal= 0
+   end
+   return returnVal, 0, 0
+end
