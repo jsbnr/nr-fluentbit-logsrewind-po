@@ -34,12 +34,14 @@ git clone https://github.com/jsbnr/nr-fluentbit-logsrewind-poc logrewind
 ```
 
 - Start the log shipper (in another window)
+
 You need to provide a source for the logs, a destination for the cache of  logs that are not shipped and a path for the extracted logs. Also add your New Relic logs ingest API key. Leave it running for a bit and confirm logs are coming into New Relic by searching for the tool attribute: `tool:logrewindpoc`
 ```
 ~/logrewind/config/startLogShipper.sh -S "$( eval echo ~ )/logrewind/logs/*.log" -C "$( eval echo ~ )/logrewind/cache/debug_cache.log" -E "$( eval echo ~ )/logrewind/extracted/*.log" -K "...your-api-key...NRAL"
 ```
 
 - Extract data for chosen window (in yet another window)
+
 Here we need to supply the file paths and then a start and end time for the window of data we're interested in:
 ```
 ~/logrewind/extractLogs.sh -S "$( eval echo ~ )/logrewind/cache/debug_cache.log" -T "$( eval echo ~ )/logrewind/extracted/extracted_" -s "2023/06/16 13:19" -e "2023/06/16 13:20"
