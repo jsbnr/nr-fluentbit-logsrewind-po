@@ -1,6 +1,8 @@
 # Logs Rewind/Enrich POC using Fluentbit
 
-This prototype demonstrates how you could mimic a "rewind and enrich" feature.
+This prototype demonstrates how you could mimic a "rewind and enrich" featur, which allows you to decide to send ingest more verbose data for a specified time period from the past.
+
+> Please note you can only go back 48 hours as the New Relic logs API [allows data only 2 days old or fresher](https://docs.newrelic.com/docs/logs/log-api/introduction-log-api/#limits).
 
 For this use-case example consider some logs that have log level ERROR, INFO and DEBUG. During normal operation you do not need the DEBUG logs however when an isssue occurs you may want to ingest those logs for analysis. You specify the window of time you want the DEBUG logs from and these get ingested.
 
